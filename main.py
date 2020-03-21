@@ -1,20 +1,21 @@
-import requests as req
-from bs4 import *
+"""
+** Personal Project **
+This is a personal project for providing updates regarding the COVID-19 outbreak.
+Date: 21st March, 2020
+Coded by: Abiskar Timsina
 
-url = req.get('https://myrepublica.nagariknetwork.com/category/coronavirus').text
-empty_list = []
-page = BeautifulSoup(url,'lxml')
+"""
+from classes.corona_data import *
 
-main_heading = page.find_all('div', class_ ='col-sm-8')
 
-for heading in main_heading:
-    title = heading.h2
-    print(title.text)
-    sub_t = heading.find_all('p')
-    for sub_topic in sub_t:
-        empty_list.append(sub_topic.text)
-    formatting = "> "+ str(empty_list[1])
-    print(formatting)
-    empty_list = []
-    print()
+obj_corona_data = corona_data_scrapper()
+obj_corona_news = corona_news_scrapper()
 
+while (1):
+    a = input ("Welcome to Webscrepper: ")
+    if (a == "!news"):
+        obj_corona_news.main()
+    elif (a == "!update"):
+        obj_corona_data.main()
+    else:
+        continue
